@@ -1,0 +1,42 @@
+<mat-card class="container-financial">
+
+    <mat-card-header>
+      <mat-card-title>Registro financiero</mat-card-title>
+      <mat-card-subtitle>informacion financiera</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="rsFormGroup" class="form" (ngSubmit)="submit()" validate>
+
+        <mat-form-field class="e-full-width">
+          <input matInput placeholder="Ocupacion" [formControl]="rsFormGroup.controls['Occupation']"
+            [errorStateMatcher]="matcher">
+          <mat-error>
+            Please enter a valid data
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="e-full-width">
+          <input matInput placeholder="Profesion" [formControl]="rsFormGroup.controls['Profession']"
+            [errorStateMatcher]="matcher">
+          <mat-error>
+            Please enter a valid data
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="e-full-width">
+          <input matInput placeholder="Ingresos" [formControl]="rsFormGroup.controls['Incomes']"
+            [errorStateMatcher]="matcher">
+          <mat-error>
+            Please enter a valid data
+          </mat-error>
+        </mat-form-field>
+
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="!rsFormGroup.valid" type="submit">SUBMMIT</button>
+    </mat-card-actions>
+
+
+
+  </mat-card>

@@ -1,0 +1,34 @@
+<mat-card class="container-card">
+
+    <mat-card-header>
+      <mat-card-title>Registro tarjeta credito</mat-card-title>
+      <mat-card-subtitle>Informacion tarjeta credito</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="rsFormGroup" class="form" (ngSubmit)="submit()" validate>
+
+        <mat-form-field class="e-full-width">
+          <input matInput placeholder="Ocupacion" [formControl]="rsFormGroup.controls['Type']"
+            [errorStateMatcher]="matcher">
+          <mat-error>
+            Please enter a valid data
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="e-full-width">
+          <input matInput placeholder="Profesion" [formControl]="rsFormGroup.controls['PayDay']"
+            [errorStateMatcher]="matcher">
+          <mat-error>
+            Please enter a valid data
+          </mat-error>
+        </mat-form-field>
+
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="!rsFormGroup.valid" type="submit">SUBMMIT</button>
+    </mat-card-actions>
+
+
+
+  </mat-card>

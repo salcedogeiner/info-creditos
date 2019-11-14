@@ -1,0 +1,16 @@
+<div class="container-user">
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step [completed]="registerEnds">
+      <ng-template matStepLabel>Registro Usuario {{ registerEnds }}</ng-template>
+      <app-users-register (completed)="registerEnds = completed($event)"></app-users-register>
+    </mat-step>
+    <mat-step [completed]="financialEnds">
+      <ng-template matStepLabel>Registro financiero</ng-template>
+      <app-users-financial></app-users-financial>
+    </mat-step>
+    <mat-step [completed]="creditCardEnds">
+      <ng-template matStepLabel>Registro tarjeta credito</ng-template>
+      <app-users-credit-card></app-users-credit-card>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
