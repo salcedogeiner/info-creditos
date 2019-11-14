@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
+import { CoreService } from './core/services/core.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { AngularFireModule } from '@angular/fire';
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [],
+  providers: [
+    CoreService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
