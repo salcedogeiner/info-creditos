@@ -21,3 +21,11 @@ export class UserModel {
     this.Email = '';
   }
 }
+
+export class FinancialModel {
+  Id: number;
+  Occupation: string;
+  Profession: string;
+  Incomes: number;
+  IdUsers: UserModel;
+}

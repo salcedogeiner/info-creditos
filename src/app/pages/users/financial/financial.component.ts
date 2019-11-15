@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CoreService } from 'src/app/core/services/core.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MyErrorStateMatcher } from 'src/app/shared/commons/error-state-matcher';
+import { FinancialModel, UserModel } from '../user-model';
 
 @Component({
   selector: 'app-users-financial',
@@ -11,10 +12,16 @@ import { MyErrorStateMatcher } from 'src/app/shared/commons/error-state-matcher'
 export class FinancialComponent implements OnInit {
 
   public rsFormGroup: FormGroup; // form
+  financialModel: FinancialModel;
+
+  @Output() completed = new EventEmitter<boolean>();
+  @Output() canceled = new EventEmitter<boolean>();
+
+  @Input() user: number;
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private todosService: CoreService) { }
+  constructor(private coreService: CoreService) { }
 
   ngOnInit() {
 
@@ -30,10 +37,61 @@ export class FinancialComponent implements OnInit {
       ])
     });
 
+    if (this.user != null ) {
+      this.setModel();
+    }
     console.log(this.rsFormGroup);
 
   }
 
 
- submit() {}
+  setModel() {
+    if (this.user != null) {
+      this.coreService.get(`financial_information/?query=IdUsers.Id:${this.user}`).subscribe(
+        (res: any) => {
+          if (typeof res !== 'string' && res.length !== 0 ) {
+            this.financialModel = res[0];
+            const { Occupation, Profession, Incomes } = this.financialModel;
+            this.rsFormGroup.setValue({
+              Occupation,
+              Profession,
+              Incomes
+            });
+          } else {
+            this.financialModel = new FinancialModel();
+            this.financialModel.IdUsers = {
+              ...new UserModel(),
+              Id: this.user,
+            };
+            this.rsFormGroup.setValue({});
+          }
+        }
+      );
+    } else {
+      this.rsFormGroup.reset();
+    }
+  }
+
+  updated() {
+   console.log('entro');
+
+   this.financialModel = { ...this.financialModel, ...this.rsFormGroup.value };
+
+   if (this.financialModel.Id != null) {
+    this.coreService.put('financial_information', this.financialModel).subscribe(
+      res => {
+        console.log(res);
+        this.completed.emit(true);
+      }
+    );
+  } else {
+    this.coreService.post('financial_information', this.financialModel).subscribe(
+      (res: any) => {
+        console.log(res);
+        if (typeof res !== 'string') { this.financialModel = res; }
+        this.completed.emit(true);
+      }
+    );
+  }
+ }
 }

@@ -11,7 +11,9 @@
     </mat-step>
     <mat-step [completed]="financialEnds">
       <ng-template matStepLabel>Registro financiero</ng-template>
-      <app-users-financial></app-users-financial>
+      <div>
+        <app-users-financial #financial [(user)]="userID"></app-users-financial>
+      </div>
     </mat-step>
     <mat-step [completed]="creditCardEnds">
       <ng-template matStepLabel>Registro tarjeta credito</ng-template>
