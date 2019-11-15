@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { CoreService } from 'src/app/core/services/core.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MyErrorStateMatcher } from 'src/app/shared/commons/error-state-matcher';
+import { UserModel } from '../user-model';
 
 @Component({
   selector: 'app-users-register',
@@ -12,8 +13,10 @@ export class RegisterComponent implements OnInit {
 
   rsFormGroup: FormGroup;
   matcher = new MyErrorStateMatcher();
+  userModel: UserModel;
 
   @Output() completed = new EventEmitter<boolean>();
+  @Output() canceled = new EventEmitter<boolean>();
 
 
   constructor(private coreService: CoreService) { }
@@ -21,6 +24,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
 
     this.rsFormGroup = new FormGroup({
+      Id: new FormControl(),
       Names: new FormControl('', [
         Validators.required,
       ]),
@@ -48,6 +52,13 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  setModel() {
+    console.log(this.userModel);
+    this.rsFormGroup.setValue(this.userModel);
+    this.completed.emit(true);
+    console.log(this.rsFormGroup);
+  }
+
  submit() {
   this.completed.emit(true);
   this.coreService.post('users', this.rsFormGroup.value).subscribe(
@@ -59,7 +70,7 @@ export class RegisterComponent implements OnInit {
  }
 
  cancel() {
- this.completed.emit(false);
+ this.canceled.emit(true);
 }
 
 }

@@ -9,4 +9,15 @@ export class UserModel {
   Address: string;
   Email: string;
 
+  constructor() {
+    this.Id = null;
+    this.Document = '';
+    this.Names = '';
+    this.LastName = '';
+    this.SecondLastName = '';
+    this.Birthday = null;
+    this.Phone = '';
+    this.Address = '';
+    this.Email = '';
+  }
 }

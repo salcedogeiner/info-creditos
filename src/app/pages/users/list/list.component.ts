@@ -28,11 +28,17 @@ export class ListComponent implements OnInit {
 
   @Output() new = new EventEmitter<boolean>();
 
+  @Output() edit = new EventEmitter<UserModel>();
+
   expandedElement: UserModel;
 
   constructor(private coreService: CoreService ) {}
 
   ngOnInit() {
+    this.getUsers();
+  }
+
+  getUsers() {
     this.coreService.get('users').subscribe(
       (res: any) => {
         console.log(res);
@@ -55,8 +61,8 @@ export class ListComponent implements OnInit {
     this.new.emit(true);
   }
 
-  editRegister() {
-    this.new.emit(true);
+  editRegister(el) {
+    this.edit.emit(el);
   }
 
 }

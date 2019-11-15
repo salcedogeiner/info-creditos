@@ -1,13 +1,13 @@
 
 <div class="container-list-users">
-  <app-users-list (new)="registerForm = $event"></app-users-list>
+  <app-users-list #list (new)="registerForm = $event; newReg()" (edit)="edit($event); registerForm = true"></app-users-list>
 </div>
 
-<div class="container-user" *ngIf="registerForm">
+<div class="container-user" [hidden]="!registerForm">
   <mat-horizontal-stepper linear #stepper>
     <mat-step [completed]="registerEnds">
       <ng-template matStepLabel>Registro Usuario {{ registerEnds }}</ng-template>
-      <app-users-register (completed)="registerEnds = completed($event)"></app-users-register>
+      <app-users-register #register (completed)="registerEnds = completed($event)" (canceled)="registerForm = false"></app-users-register>
     </mat-step>
     <mat-step [completed]="financialEnds">
       <ng-template matStepLabel>Registro financiero</ng-template>
