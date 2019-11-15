@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { CoreService } from './core/services/core.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { CoreService } from './core/services/core.service';
     PagesModule,
     CoreModule,
     SharedModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [

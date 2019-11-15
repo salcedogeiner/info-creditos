@@ -1,15 +1,62 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { UserModel } from '../user-model';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { CoreService } from 'src/app/core/services/core.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-users-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns: string[] = ['Document', 'Names', 'LastName', 'SecondLastName', 'Email'];
+  dataSource: MatTableDataSource<UserModel>;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  @Output() new = new EventEmitter<boolean>();
+
+  expandedElement: UserModel;
+
+  constructor(private coreService: CoreService ) {}
 
   ngOnInit() {
+    this.coreService.get('users').subscribe(
+      (res: any) => {
+        console.log(res);
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    );
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  newRegister() {
+    this.new.emit(true);
+  }
+
+  editRegister() {
+    this.new.emit(true);
   }
 
 }

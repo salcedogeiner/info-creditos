@@ -11,6 +11,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { FinancialComponent } from './financial/financial.component';
 import { CreditCardComponent } from './credit-card/credit-card.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [UsersComponent, RegisterComponent, ListComponent, FinancialComponent, CreditCardComponent],
@@ -22,14 +26,22 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatButtonModule,
     MatInputModule,
     MatGridListModule,
-    MatStepperModule
+    MatStepperModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [
     MatCardModule,
     MatButtonModule,
     MatInputModule,
     MatGridListModule,
-    MatStepperModule
-  ]
+    MatStepperModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+  ],
 })
 export class UsersModule { }

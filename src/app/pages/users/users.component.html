@@ -1,4 +1,9 @@
-<div class="container-user">
+
+<div class="container-list-users">
+  <app-users-list (new)="registerForm = $event"></app-users-list>
+</div>
+
+<div class="container-user" *ngIf="registerForm">
   <mat-horizontal-stepper linear #stepper>
     <mat-step [completed]="registerEnds">
       <ng-template matStepLabel>Registro Usuario {{ registerEnds }}</ng-template>
@@ -14,3 +19,4 @@
     </mat-step>
   </mat-horizontal-stepper>
 </div>
+

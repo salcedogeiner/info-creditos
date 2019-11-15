@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { CoreService } from 'src/app/core/services/core.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MyErrorStateMatcher } from 'src/app/shared/commons/error-state-matcher';
@@ -10,13 +10,13 @@ import { MyErrorStateMatcher } from 'src/app/shared/commons/error-state-matcher'
 })
 export class RegisterComponent implements OnInit {
 
-  public rsFormGroup: FormGroup;
+  rsFormGroup: FormGroup;
   matcher = new MyErrorStateMatcher();
 
   @Output() completed = new EventEmitter<boolean>();
 
 
-  constructor(private todosService: CoreService) { }
+  constructor(private coreService: CoreService) { }
 
   ngOnInit() {
 
@@ -46,16 +46,20 @@ export class RegisterComponent implements OnInit {
         Validators.required,
       ]),
     });
-
-     console.log(this.rsFormGroup);
-
   }
 
-
  submit() {
-   console.log('entro');
-
   this.completed.emit(true);
+  this.coreService.post('users', this.rsFormGroup.value).subscribe(
+    res => {
+      console.log(res);
+      this.completed.emit(true);
+    }
+  );
  }
+
+ cancel() {
+ this.completed.emit(false);
+}
 
 }

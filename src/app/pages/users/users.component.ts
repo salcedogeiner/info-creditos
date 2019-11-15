@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatHorizontalStepper } from '@angular/material/stepper';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -11,6 +12,8 @@ export class UsersComponent implements OnInit {
   financialEnds: boolean;
   registerEnds = false;
   creditCardEnds: boolean;
+
+  registerForm: boolean;
 
   @ViewChild('stepper', {static: false}) stepper: MatHorizontalStepper;
 

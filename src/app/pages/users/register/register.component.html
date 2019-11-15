@@ -1,10 +1,10 @@
 <mat-card class="container-register">
-    <form [formGroup]="rsFormGroup" class="form" (ngSubmit)="submit()" validate>
-  <mat-card-header>
-    <mat-card-title>Registro de usuario</mat-card-title>
-    <mat-card-subtitle>Datos generales</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
+  <form [formGroup]="rsFormGroup" class="form" (ngSubmit)="submit()" validate>
+    <mat-card-header>
+      <mat-card-title>Registro de usuario</mat-card-title>
+      <mat-card-subtitle>Datos generales</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
 
 
       <mat-form-field class="e-full-width">
@@ -40,8 +40,10 @@
       </mat-form-field>
 
       <mat-form-field class="e-full-width">
-        <input matInput placeholder="Fecha Nacimiento" [formControl]="rsFormGroup.controls['Birthday']"
-          [errorStateMatcher]="matcher">
+        <input matInput [matDatepicker]="picker" placeholder="Fecha Nacimiento"
+          [formControl]="rsFormGroup.controls['Birthday']">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
         <mat-error>
           Please enter a valid data
         </mat-error>
@@ -74,11 +76,12 @@
 
 
 
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" [disabled]="!rsFormGroup.valid" type="submit">SUBMMIT</button>
-  </mat-card-actions>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="!rsFormGroup.valid" type="submit">CONFIRMAR</button>
+      <button mat-raised-button color="primary"  (click)="cancel()">CANCELAR</button>
+    </mat-card-actions>
 
 
-</form>
+  </form>
 </mat-card>
