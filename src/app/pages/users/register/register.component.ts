@@ -61,12 +61,23 @@ export class RegisterComponent implements OnInit {
 
  submit() {
   this.completed.emit(true);
-  this.coreService.post('users', this.rsFormGroup.value).subscribe(
-    res => {
-      console.log(res);
-      this.completed.emit(true);
-    }
-  );
+  this.userModel = this.rsFormGroup.value;
+
+  if (this.userModel.Id !== null) {
+    this.coreService.put('users', this.userModel).subscribe(
+      res => {
+        console.log(res);
+        this.completed.emit(true);
+      }
+    );
+  } else {
+    this.coreService.post('users', this.userModel).subscribe(
+      res => {
+        console.log(res);
+        this.completed.emit(true);
+      }
+    );
+  }
  }
 
  cancel() {

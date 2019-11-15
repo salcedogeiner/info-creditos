@@ -27,7 +27,7 @@ export class CreditCardComponent implements OnInit {
       ]),
     });
 
-     console.log(this.rsFormGroup);
+    console.log(this.rsFormGroup);
 
   }
 

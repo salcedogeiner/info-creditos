@@ -31,7 +31,7 @@ export class CoreService {
   }
 
   put(endpoint, element) {
-    return this.http.put(path + endpoint + '/' + element.id, element, httpOptions).pipe(
+    return this.http.put(path + endpoint + '/' + element.Id, element, httpOptions).pipe(
       catchError(this.handleError),
     );
   }

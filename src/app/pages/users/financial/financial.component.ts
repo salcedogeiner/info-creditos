@@ -30,7 +30,7 @@ export class FinancialComponent implements OnInit {
       ])
     });
 
-     console.log(this.rsFormGroup);
+    console.log(this.rsFormGroup);
 
   }
 
