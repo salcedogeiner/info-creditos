@@ -1,14 +1,13 @@
 <mat-card class="container-card">
-
+  <form [formGroup]="rsFormGroup" class="form" (ngSubmit)="submit()" validate>
     <mat-card-header>
       <mat-card-title>Registro tarjeta credito</mat-card-title>
       <mat-card-subtitle>Informacion tarjeta credito</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="rsFormGroup" class="form" (ngSubmit)="submit()" validate>
 
         <mat-form-field class="e-full-width">
-          <input matInput placeholder="Ocupacion" [formControl]="rsFormGroup.controls['Type']"
+          <input matInput placeholder="Franquicia" [formControl]="rsFormGroup.controls['Type']"
             [errorStateMatcher]="matcher">
           <mat-error>
             Please enter a valid data
@@ -16,19 +15,19 @@
         </mat-form-field>
 
         <mat-form-field class="e-full-width">
-          <input matInput placeholder="Profesion" [formControl]="rsFormGroup.controls['PayDay']"
+          <input matInput placeholder="Fecha Facturacion" [formControl]="rsFormGroup.controls['PayDay']" type="number"
             [errorStateMatcher]="matcher">
           <mat-error>
             Please enter a valid data
           </mat-error>
         </mat-form-field>
 
-      </form>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" [disabled]="!rsFormGroup.valid" type="submit">SUBMMIT</button>
+      <button mat-raised-button color="primary"  (click)="cancel()">CANCELAR</button>
     </mat-card-actions>
 
-
+  </form>
 
   </mat-card>

@@ -39,7 +39,7 @@ export class ListComponent implements OnInit {
   }
 
   getUsers() {
-    this.coreService.get('users').subscribe(
+    this.coreService.get('users?limit=0').subscribe(
       (res: any) => {
         console.log(res);
         this.dataSource = new MatTableDataSource(res);

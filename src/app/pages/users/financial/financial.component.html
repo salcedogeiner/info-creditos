@@ -4,7 +4,7 @@
       <mat-card-title>Registro financiero</mat-card-title>
       <mat-card-subtitle>informacion financiera</mat-card-subtitle>
     </mat-card-header>
-    <form [formGroup]="rsFormGroup" class="form" (ngSubmit)="updated()" validate>
+    <form [formGroup]="rsFormGroup" class="form" (ngSubmit)="submit()" validate>
     <mat-card-content>
 
 
@@ -36,6 +36,7 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" [disabled]="!rsFormGroup.valid" type="submit">SUBMMIT</button>
+      <button mat-raised-button color="primary"  (click)="cancel()">CANCELAR</button>
     </mat-card-actions>
 
   </form>

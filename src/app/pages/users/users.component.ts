@@ -13,9 +13,9 @@ import { FinancialComponent } from './financial/financial.component';
 })
 export class UsersComponent implements OnInit {
 
-  financialEnds: boolean;
+  financialEnds = false;
   registerEnds = false;
-  creditCardEnds: boolean;
+  creditCardEnds = false;
   userID = null;
   registerForm: boolean;
 
@@ -24,6 +24,7 @@ export class UsersComponent implements OnInit {
   @ViewChild('list', {static: false}) list: ListComponent;
   @ViewChild('register', {static: false}) register: RegisterComponent;
   @ViewChild('financial', {static: false}) financial: FinancialComponent;
+  @ViewChild('creditCard', {static: false}) creditCard: FinancialComponent;
 
   constructor() { }
 
@@ -36,15 +37,28 @@ export class UsersComponent implements OnInit {
     this.userID = el.Id;
     this.register.setModel();
     this.financial.setModel();
+    this.creditCard.setModel();
   }
 
-  completed($event) {
-    this.registerEnds = true;
+  completedRegister($event) {
+    this.registerEnds = $event;
     this.list.getUsers();
     this.stepper.next();
     this.userID = this.register.userModel.Id;
-    this.financial.setModel();
-    return $event;
+    this.financial.user = this.register.userModel.Id;
+    this.financial.newModel();
+  }
+
+  completedFinancials($event) {
+    this.financialEnds = $event;
+    this.stepper.next();
+    this.creditCard.user = this.register.userModel.Id;
+    this.creditCard.newModel();
+  }
+
+  completedCreditCard($event) {
+    this.financialEnds = $event;
+    this.registerForm = false;
   }
 
   newReg() {

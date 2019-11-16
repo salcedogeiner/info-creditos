@@ -49,7 +49,7 @@ export class FinancialComponent implements OnInit {
     if (this.user != null) {
       this.coreService.get(`financial_information/?query=IdUsers.Id:${this.user}`).subscribe(
         (res: any) => {
-          if (typeof res !== 'string' && res.length !== 0 ) {
+          if ( res && typeof res !== 'string' && res.length !== 0 ) {
             this.financialModel = res[0];
             const { Occupation, Profession, Incomes } = this.financialModel;
             this.rsFormGroup.setValue({
@@ -57,13 +57,7 @@ export class FinancialComponent implements OnInit {
               Profession,
               Incomes
             });
-          } else {
-            this.financialModel = new FinancialModel();
-            this.financialModel.IdUsers = {
-              ...new UserModel(),
-              Id: this.user,
-            };
-            this.rsFormGroup.setValue({});
+            this.completed.emit(true);
           }
         }
       );
@@ -72,8 +66,20 @@ export class FinancialComponent implements OnInit {
     }
   }
 
-  updated() {
+  newModel() {
+    if (!this.financialModel || this.financialModel.Id != null) {
+      this.financialModel = new FinancialModel();
+      this.financialModel.IdUsers = {
+              ...new UserModel(),
+              Id: this.user,
+            };
+      this.rsFormGroup.reset();
+    }
+  }
+
+  submit() {
    console.log('entro');
+   this.completed.emit(true);
 
    this.financialModel = { ...this.financialModel, ...this.rsFormGroup.value };
 
@@ -93,5 +99,9 @@ export class FinancialComponent implements OnInit {
       }
     );
   }
+ }
+
+ cancel() {
+  this.canceled.emit(true);
  }
 }

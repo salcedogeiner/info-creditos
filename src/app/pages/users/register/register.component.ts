@@ -54,9 +54,13 @@ export class RegisterComponent implements OnInit {
 
   setModel() {
     console.log(this.userModel);
-    this.rsFormGroup.setValue(this.userModel);
-    this.completed.emit(true);
-    console.log(this.rsFormGroup);
+    if (!this.userModel.Id) {
+      this.userModel = new UserModel();
+      this.rsFormGroup.reset();
+    } else {
+      this.rsFormGroup.setValue(this.userModel);
+      this.completed.emit(true);
+    }
   }
 
  submit() {

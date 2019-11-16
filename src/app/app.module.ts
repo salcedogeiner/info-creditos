@@ -11,6 +11,9 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { CoreService } from './core/services/core.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthenticationService } from './shared/authentication/service/authentication.service';
+import { FormsModule } from '@angular/forms';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -24,10 +27,13 @@ import { HttpClientModule } from '@angular/common/http';
     CoreModule,
     SharedModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    FormsModule
   ],
   providers: [
-    CoreService
+    CoreService,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

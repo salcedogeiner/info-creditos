@@ -8,18 +8,6 @@ export class UserModel {
   Phone: string;
   Address: string;
   Email: string;
-
-  constructor() {
-    this.Id = null;
-    this.Document = '';
-    this.Names = '';
-    this.LastName = '';
-    this.SecondLastName = '';
-    this.Birthday = null;
-    this.Phone = '';
-    this.Address = '';
-    this.Email = '';
-  }
 }
 
 export class FinancialModel {
@@ -27,5 +15,16 @@ export class FinancialModel {
   Occupation: string;
   Profession: string;
   Incomes: number;
+  IdUsers: UserModel;
+}
+
+export class CardModel {
+  Id: number;
+  Amount: number;
+  Type: string;
+  PayDay: number;
+  Cvv: number;
+  EndDate: string;
+  Blocked: boolean;
   IdUsers: UserModel;
 }
