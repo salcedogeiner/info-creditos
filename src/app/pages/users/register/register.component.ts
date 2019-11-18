@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
   }
 
   setModel() {
-    console.log(this.userModel);
+    // console.log(this.userModel);
     if (!this.userModel.Id) {
       this.userModel = new UserModel();
       this.rsFormGroup.reset();
@@ -70,14 +70,14 @@ export class RegisterComponent implements OnInit {
   if (this.userModel.Id !== null) {
     this.coreService.put('users', this.userModel).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.completed.emit(true);
       }
     );
   } else {
     this.coreService.post('users', this.userModel).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.completed.emit(true);
       }
     );

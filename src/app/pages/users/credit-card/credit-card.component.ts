@@ -38,7 +38,7 @@ export class CreditCardComponent implements OnInit {
     if (this.user != null ) {
       this.setModel();
     }
-    console.log(this.rsFormGroup);
+    // console.log(this.rsFormGroup);
 
   }
 
@@ -54,7 +54,6 @@ export class CreditCardComponent implements OnInit {
               Type,
               PayDay
             });
-            this.completed.emit(true);
           }
         }
       );
@@ -75,7 +74,7 @@ export class CreditCardComponent implements OnInit {
   }
 
   submit() {
-   console.log('entro');
+   // console.log('entro');
    this.completed.emit(true);
 
    this.cardModel = { ...this.cardModel, ...this.rsFormGroup.value };
@@ -83,14 +82,14 @@ export class CreditCardComponent implements OnInit {
    if (this.cardModel.Id != null) {
     this.coreService.put('credit_cards', this.cardModel).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.completed.emit(true);
       }
     );
   } else {
     this.coreService.post('credit_cards', this.cardModel).subscribe(
       (res: any) => {
-        console.log(res);
+        // console.log(res);
         if (typeof res !== 'string') { this.cardModel = res; }
         this.completed.emit(true);
       }

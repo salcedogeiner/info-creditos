@@ -1,5 +1,11 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <h1>Info Credito</h1>
+    <div>
+        <h1>Info Credito</h1>
+    </div>
+    <div *ngIf="user">
+        <span (click)="logout()">Logout</span>
+    </div>
+
   </mat-toolbar-row>
 </mat-toolbar>

@@ -31,3 +31,18 @@
   </form>
 
   </mat-card>
+
+
+  <mat-card class="container-card credit-card" *ngIf="cardModel && cardModel.Cvv">
+
+        <mat-card-content>
+
+            <h1>{{ cardModel.Cvv }}</h1>
+            <h2>{{ cardModel.Type }}</h2>
+            <h2> {{ cardModel.Amount | currency }} </h2>
+
+        </mat-card-content>
+
+
+
+      </mat-card>

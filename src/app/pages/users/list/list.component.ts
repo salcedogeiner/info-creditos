@@ -41,8 +41,9 @@ export class ListComponent implements OnInit {
   getUsers() {
     this.coreService.get('users?limit=0').subscribe(
       (res: any) => {
-        console.log(res);
-        this.dataSource = new MatTableDataSource(res);
+        // console.log(res);
+        const data = res ? res : [];
+        this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }

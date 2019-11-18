@@ -19,28 +19,25 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.authenticationService.logged.subscribe(res => {
+      if (res) {
+        this.router.navigate(['users']);
+      }
+    });
   }
 
   signUp() {
-    console.log('entro a up');
+    // console.log('entro a up');
     this.authenticationService.SignUp(this.email, this.password);
     this.email = '';
     this.password = '';
   }
 
-  signIn() {
-    console.log('entro a In');
-    this.authenticationService.SignIn(this.email, this.password)
-    .then(res => {
-      this.email = '';
-      this.password = '';
-      console.log('Successfully signed in!', res);
-      this.router.navigate(['users']);
-    })
-    .catch(err => {
-      console.log('Something is wrong:', err.message);
-      alert('Invalid credentials');
-    });
+  async signIn() {
+    // console.log('entro a In');
+    await this.authenticationService.SignIn(this.email, this.password);
+    this.email = '';
+    this.password = '';
   }
 
   signOut() {

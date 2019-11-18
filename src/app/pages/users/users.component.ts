@@ -34,6 +34,7 @@ export class UsersComponent implements OnInit {
   edit(el) {
     this.register.userModel = el;
     this.financial.user = el.Id;
+    this.creditCard.user = el.Id;
     this.userID = el.Id;
     this.register.setModel();
     this.financial.setModel();
@@ -52,6 +53,7 @@ export class UsersComponent implements OnInit {
   completedFinancials($event) {
     this.financialEnds = $event;
     this.stepper.next();
+    this.userID = this.register.userModel.Id;
     this.creditCard.user = this.register.userModel.Id;
     this.creditCard.newModel();
   }

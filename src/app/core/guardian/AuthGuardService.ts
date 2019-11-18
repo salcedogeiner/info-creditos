@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthenticationService } from 'src/app/shared/authentication/service/authentication.service';
 
 @Injectable({
     providedIn: 'root',
@@ -9,10 +9,7 @@ export class AuthGuardService implements CanActivate {
 
   access: boolean;
 
-    constructor(private router: Router,
-                private angularFireAuth: AngularFireAuth ) {
-
-                  angularFireAuth.idToken.subscribe(res => (this.access = res ? true : false ));
+    constructor( private auth: AuthenticationService ) {
     }
 
     public canActivate(): boolean {
@@ -28,8 +25,10 @@ export class AuthGuardService implements CanActivate {
       }
 
       public checkStatementAvailability(): boolean {
-        if (!this.access) { this.router.navigate(['login']); }
-        return this.access;
+        if (this.auth.userData && this.auth.userData.uid) {
+          return true;
+        }
+        return false;
       }
 
 }

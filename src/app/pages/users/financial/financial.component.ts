@@ -40,7 +40,7 @@ export class FinancialComponent implements OnInit {
     if (this.user != null ) {
       this.setModel();
     }
-    console.log(this.rsFormGroup);
+    // console.log(this.rsFormGroup);
 
   }
 
@@ -78,7 +78,7 @@ export class FinancialComponent implements OnInit {
   }
 
   submit() {
-   console.log('entro');
+   // console.log('entro');
    this.completed.emit(true);
 
    this.financialModel = { ...this.financialModel, ...this.rsFormGroup.value };
@@ -86,14 +86,14 @@ export class FinancialComponent implements OnInit {
    if (this.financialModel.Id != null) {
     this.coreService.put('financial_information', this.financialModel).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.completed.emit(true);
       }
     );
   } else {
     this.coreService.post('financial_information', this.financialModel).subscribe(
       (res: any) => {
-        console.log(res);
+        // console.log(res);
         if (typeof res !== 'string') { this.financialModel = res; }
         this.completed.emit(true);
       }
